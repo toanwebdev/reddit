@@ -57,6 +57,8 @@ async function main() {
   await mongoose.connect(mongoUrl);
   console.log('MongoDB Connected');
 
+  app.set('trust proxy', 1);
+
   app.use(
     session({
       name: COOKIE_NAME,
@@ -65,8 +67,7 @@ async function main() {
         maxAge: 1000 * 60 * 60, // one hour
         httpOnly: true, // JS front end cannot access the cookie
         secure: __prod__, // cookie only works in https
-        sameSite: 'lax', // protection against CSRF
-        domain: __prod__ ? '.vercel.app' : undefined
+        sameSite: 'none', // protection against CSRF
       },
       secret: process.env.SESSION_SECRET_DEV_PROD as string,
       saveUninitialized: false, // don't save empty session, right from the start
