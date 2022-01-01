@@ -19,7 +19,7 @@ const Register = () => {
 
 	const initialValues: RegisterInput = { username: '', email: '', password: '' }
 
-	const [registerUser, { data, error }] = useRegisterMutation()
+	const [registerUser, { error }] = useRegisterMutation()
 	const toast = useToast()
 
 	const onRegisterSubmit = async (
